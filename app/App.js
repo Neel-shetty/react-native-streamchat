@@ -12,8 +12,12 @@ import {
 
 export default function App() {
   function onPress() {
-    axios.get({ method: "get", url: "http://localhost:4000/" }).then((res) => {
-      console.log(res);
+    axios.get("http://localhost:4000/").then((res) => {
+      try {
+        console.log(res);
+      } catch (e) {
+        console.warn(e);
+      }
     });
     // const sugg = WriteGood('thiss is intresting, my mother are a cook also my dad is a engineer')
   }
