@@ -1,5 +1,6 @@
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import {
   Button,
   Dimensions,
@@ -11,22 +12,24 @@ import {
 // import WriteGood from "write-good";
 
 export default function App() {
+  const [data,setData] = useState()
   function onPress() {
-    axios.get("http://localhost:4000/").then((res) => {
-      try {
-        console.log(res);
-      } catch (e) {
-        console.warn(e);
-      }
-    });
-    // const sugg = WriteGood('thiss is intresting, my mother are a cook also my dad is a engineer')
+    fetch("https://randomuser.me/api/")
+      .then((response) => response.json())
+      .then((data) => {
+        // Use the data from the server here
+        setData(JSON.stringify(data))
+      })
+      .catch((error) => {
+        // Handle any errors that occur
+        console.error(error);
+      });
   }
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
-      <TextInput style={styles.input} />
-      <Button title="Press" onPress={onPress} />
+      <Button title="Load data" onPress={onPress} />
+      <Text>{data}</Text>
     </View>
   );
 }
