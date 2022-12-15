@@ -12,13 +12,13 @@ import {
 // import WriteGood from "write-good";
 
 export default function App() {
-  const [data,setData] = useState()
+  const [data, setData] = useState();
   function onPress() {
     fetch("https://randomuser.me/api/")
       .then((response) => response.json())
       .then((data) => {
         // Use the data from the server here
-        setData(JSON.stringify(data))
+        setData(JSON.stringify(data));
       })
       .catch((error) => {
         // Handle any errors that occur
